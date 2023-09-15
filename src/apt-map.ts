@@ -72,7 +72,7 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
 
   getEntryByIndex(index: number): [K, V] | unknown[] {
     let resultEntry: [K, V] | unknown[] = [];
-    const isIndexInRange = index > 0 && index < this.size;
+    const isIndexInRange = index >= 0 && index < this.size;
 
     if (isIndexInRange) {
       let mapIndex = 0;
@@ -82,6 +82,8 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
           resultEntry = entry;
           break;
         }
+
+        mapIndex++;
       }
     }
 
