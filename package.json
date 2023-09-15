@@ -1,0 +1,23 @@
+{
+  "name": "apt-map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jarcko/apt-map.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jarcko/apt-map/issues"
+  },
+  "homepage": "https://github.com/jarcko/apt-map#readme",
+  "devDependencies": {
+    "typescript": "^3.5.0"
+  }
+}
