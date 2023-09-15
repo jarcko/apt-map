@@ -1,6 +1,6 @@
 {
   "name": "apt-map",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "description": "Convenient iterable collection based on ES6 Map",
   "main": "index.js",
   "scripts": {
