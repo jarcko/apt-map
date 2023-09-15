@@ -1,7 +1,7 @@
 {
   "name": "apt-map",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.2.0",
+  "description": "Convenient iterable collection based on ES6 Map",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,14 +10,21 @@
     "type": "git",
     "url": "git+https://github.com/jarcko/apt-map.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "typescript",
+    "map",
+    "iterable map",
+    "array like map",
+    "apt map"
+  ],
+  "author": "Ihor Zharko",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jarcko/apt-map/issues"
   },
   "homepage": "https://github.com/jarcko/apt-map#readme",
   "devDependencies": {
+    "ts-node": "^4.1.0",
     "typescript": "^3.5.0"
   }
 }
