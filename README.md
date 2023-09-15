@@ -35,7 +35,7 @@ npm install --save apt-map
 
 - Combines pros of array and ES6 Map(classic js object). You can work with the collection similar way as with an array
   and also able to get element by key with O(1) complexity
-- Extends basic ES6 Map so backward compatible and Map can be substituted with AptMap when needed
+- Extends basic ES6 Map so backward compatible and traditional `Map` can be substituted with `AptMap` when needed
 
 ## Properties
 
