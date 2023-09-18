@@ -37,7 +37,7 @@ npm install --save apt-map
   and also able to get element by key with O(1) complexity
 - Extends basic ES6 Map so backward compatible and traditional `Map` can be substituted with `AptMap` when needed
 
-## Properties
+## Properties (readonly)
 
 | Name         | Description                                                              |
 |--------------|--------------------------------------------------------------------------|
