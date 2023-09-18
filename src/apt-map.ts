@@ -1,9 +1,9 @@
 export class AptMap<K = any, V = any> extends Map<K, V> {
-  get firstKey(): K {
+  get firstKey(): K | undefined {
     return this.keys().next().value;
   }
 
-  get firstValue(): V {
+  get firstValue(): V | undefined {
     return this.values().next().value;
   }
 
@@ -11,14 +11,14 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
     return this.size === 0;
   }
 
-  get lastKey(): K {
+  get lastKey(): K | undefined {
     const index = this.size - 1;
     const keys = this.keysAsArray();
 
     return keys[index]
   }
 
-  get lastValue(): V {
+  get lastValue(): V | undefined {
     const index = this.size - 1;
     const values = this.valuesAsArray();
 
@@ -53,7 +53,7 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
     return filtered;
   }
 
-  findEntry(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): [K, V] | unknown[] {
+  findEntry(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): [K, V] | [] {
     let foundKey: K | undefined;
     let foundValue: V | undefined;
 
@@ -67,7 +67,19 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
       }
     }
 
-    return [foundKey, foundValue].filter(Boolean);
+    return Boolean(foundKey && foundValue)
+      ? [foundKey as K, foundValue as V]
+      : [];
+  }
+
+  findKey(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): K | undefined {
+    const [key] = this.findEntry(cb);
+    return key;
+  }
+
+  findValue(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): V | undefined {
+    const [, value] = this.findEntry(cb);
+    return value;
   }
 
   getEntryByIndex(index: number): [K, V] | unknown[] {

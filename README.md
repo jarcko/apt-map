@@ -39,14 +39,14 @@ npm install --save apt-map
 
 ## Properties (readonly)
 
-| Name         | Description                                                              |
-|--------------|--------------------------------------------------------------------------|
-| `firstKey`   | Returns first key                                                        |
-| `firstValue` | Returns first value                                                      |
-| `isEmpty`    | Returns `true` if apt map does not have any elements, otherwise, `false` |
-| `lastKey`    | Returns last key                                                         |
-| `lastValue`  | Returns last value                                                       |
-| `size`       | Returns the number of elements in this map                               |
+| Name         | Description                                                             |
+|--------------|-------------------------------------------------------------------------|
+| `firstKey`   | Returns first key if it exists, otherwise `undefined`                   |
+| `firstValue` | Returns first value if it exists, otherwise `undefined`                 |
+| `isEmpty`    | Returns `true` if apt map does not have any elements, otherwise `false` |
+| `lastKey`    | Returns last key if it exists, otherwise `undefined`                    |
+| `lastValue`  | Returns last value if it exists, otherwise `undefined`                  |
+| `size`       | Returns the number of elements in this map                              |
 
 ## Methods
 
@@ -59,7 +59,9 @@ npm install --save apt-map
 | `entriesAsArray(): Array<[K, V]>`                                                          | Returns an array of `[key, value]` pairs                                                                                                                                            |
 | `delete(key: K): boolean`                                                                  | Deletes element by key and returns `true` if element has been removed                                                                                                               |
 | `filter(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): AptMap<K, V>`          | Filters input apt map using callback function and returns filtered apt map                                                                                                          |
-| `findEntry(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): [K, V]`             | Return first entry which satisfies condition in callback function                                                                                                                   |
+| `findEntry(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): [K, V] \| []`       | Returns first entry which satisfies condition in callback function, otherwise an empty array                                                                                        |
+| `findKey(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): K \| undefined`       | Returns first key which satisfies condition in callback function, otherwise undefined                                                                                               |
+| `findValue(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): V \| undefined`     | Returns first value which satisfies condition in callback function, otherwise undefined                                                                                             |
 | `forEach(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => void)`                          | Iterates via apt map and calls callback function per each entry                                                                                                                     |
 | `get(key: K): V`                                                                           | Retrieves an element by key                                                                                                                                                         |
 | `getEntryByIndex(index: number): [K, V]`                                                   | Returns an entry by index                                                                                                                                                           |

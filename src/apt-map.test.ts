@@ -168,6 +168,30 @@ describe('AptMap', () => {
     });
   });
 
+  describe('findKey method', () => {
+    test('should return the key which satisfies callback function condition', () => {
+      const result = aptMap.findKey((value, key) => value === 2 && key === 'b');
+      expect(result).toEqual(entries[1][0]);
+    });
+
+    test('should return an empty array if callback function condition is not fulfilled', () => {
+      const result = aptMap.findKey((value, key) => value === 0 && key === '');
+      expect(result).toBeUndefined();
+    });
+  });
+
+  describe('findValue method', () => {
+    test('should return the key which satisfies callback function condition', () => {
+      const result = aptMap.findValue((value, key) => value === 2 && key === 'b');
+      expect(result).toEqual(entries[1][1]);
+    });
+
+    test('should return an empty array if callback function condition is not fulfilled', () => {
+      const result = aptMap.findValue((value, key) => value === 0 && key === '');
+      expect(result).toBeUndefined();
+    });
+  });
+
   describe('getEntryByIndex method', () => {
     test('should return entry which corresponds to index of the entries order', () => {
       const result = aptMap.getEntryByIndex(1);
@@ -334,12 +358,5 @@ describe('AptMap', () => {
       expect(result).toEqual([1, 2, 3]);
     });
   });
-
-  // describe('', () => {
-  //   test('should ', () => {
-  //
-  //
-  //   });
-  // });
 
 });
