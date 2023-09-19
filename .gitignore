@@ -1,9 +1,14 @@
-/node_modules
 /.idea
+/.pnpm-store
+/.vscode
+/html
+/node_modules
 
 # Ignore test-related files
 /coverage.data
-/coverage/
+/coverage
 
 # Build files
 /dist
+
+.eslintcache
