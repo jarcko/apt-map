@@ -39,6 +39,20 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
     return Array.from(this.entries());
   }
 
+  every(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): boolean {
+    let result = false;
+
+    for (const [mapKey, mapValue] of this) {
+      result = cb.apply(this, [mapValue, mapKey, this]);
+
+      if (!result) {
+        break;
+      }
+    }
+
+    return result;
+  }
+
   filter(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): AptMap<K, V> {
     const filtered = new AptMap<K, V>();
 
@@ -82,8 +96,8 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
     return value;
   }
 
-  getEntryByIndex(index: number): [K, V] | unknown[] {
-    let resultEntry: [K, V] | unknown[] = [];
+  getEntryByIndex(index: number): [K, V] | [] {
+    let resultEntry: [K, V] | [] = [];
     const isIndexInRange = index >= 0 && index < this.size;
 
     if (isIndexInRange) {

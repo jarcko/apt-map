@@ -148,6 +148,18 @@ describe('AptMap', () => {
     });
   });
 
+  describe('every method', () => {
+    test('should return true if callback function condition is satisfied for all entries', () => {
+      const result = aptMap.every((value, key) => value > 0 && key !== 'x');
+      expect(result).toBe(true);
+    });
+
+    test('should return false if callback function condition is not fulfilled at least for one entry', () => {
+      const result = aptMap.every((value, key) => value > 0 && key !== 'c');
+      expect(result).toBe(false);
+    });
+  });
+
   describe('filter method', () => {
     test('should return new apt map with filtered entries', () => {
       const filteredAptMap = aptMap.filter((value, key) => value > 1 && key !== 'b');
@@ -327,7 +339,7 @@ describe('AptMap', () => {
   });
 
   describe('some method', () => {
-    test('should return true if callback function condition is satisfied', () => {
+    test('should return true if callback function condition is satisfied at least for one entry', () => {
       const result = aptMap.some((value, key) => value > 2 && key === 'c');
       expect(result).toBe(true);
     });
