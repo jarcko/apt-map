@@ -1,1 +1,1 @@
-export * from './apt-map'
+export * from './apt-map';

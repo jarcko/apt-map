@@ -5,7 +5,7 @@ which is not quite enough in many cases. AptMap implements the most commonly use
 from array like filter, find, some etc.
 
 ```ts
-AptMap<K, V>
+AptMap<K, V>;
 ```
 
 `K` - generic type for key, can be any type including object
@@ -18,9 +18,9 @@ Example:
 const obj = {
   a: 1,
   b: 2,
-}
-const entries: [string, number][] = Object.entries(obj)
-const map = new AptMap<string, number>()
+};
+const entries: [string, number][] = Object.entries(obj);
+const map = new AptMap<string, number>();
 ```
 
 ## Installation
