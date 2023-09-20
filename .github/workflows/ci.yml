@@ -89,4 +89,4 @@ jobs:
         run: pnpm install
 
       - name: 🧪 Run unit tests
-        run: pnpm run test --single-thread
+        run: pnpm run test --coverage --single-thread

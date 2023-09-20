@@ -6,8 +6,10 @@ export default defineConfig({
       branches: 100,
       functions: 100,
       lines: 100,
+      reporter: ['text-summary', 'text'],
       statements: 100,
     },
     globals: true,
+    reporters: ['verbose'],
   },
 })
