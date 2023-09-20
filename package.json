@@ -1,6 +1,7 @@
 {
   "name": "apt-map",
   "version": "1.0.4",
+  "packageManager": "pnpm@8.7.6",
   "description": "Convenient iterable collection based on ES6 Map",
   "author": "Ihor Zharko",
   "license": "MIT",

@@ -1,0 +1,92 @@
+name: CI
+
+permissions: {}
+
+on:
+  pull_request:
+    branches:
+      - master
+
+  push:
+    branches:
+      - master
+
+concurrency:
+  cancel-in-progress: true
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+
+env:
+  NODE_OPTIONS: --max-old-space-size=6144
+
+jobs:
+  lint:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20]
+        os: [ubuntu-latest]
+
+    name: Lint code
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: ./.github/actions/setup-and-cache
+        with:
+          node: ${{ matrix.node }}
+
+      - name: 📦 Install dependencies
+        run: pnpm install
+
+      - name: 📝 Lint code
+        run: pnpm run lint
+
+  typecheck:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20]
+        os: [ubuntu-latest]
+
+    name: Check types
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: ./.github/actions/setup-and-cache
+        with:
+          node: ${{ matrix.node }}
+
+      - name: 📦 Install dependencies
+        run: pnpm install
+
+      - name: 💪 Check types
+        run: pnpm run typecheck
+
+  test:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20]
+        os: [ubuntu-latest]
+
+    name: Run unit tests
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: ./.github/actions/setup-and-cache
+        with:
+          node: ${{ matrix.node }}
+
+      - name: 📦 Install dependencies
+        run: pnpm install
+
+      - name: 🧪 Run unit tests
+        run: pnpm run test --single-thread

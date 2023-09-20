@@ -1,0 +1,21 @@
+name: Setup and cache
+description: Setup for Node, pnpm and cache
+
+inputs:
+  node:
+    default: 18.x
+    description: Node.js version for setup node
+    required: false
+
+runs:
+  using: composite
+
+  steps:
+    - name: Install pnpm
+      uses: pnpm/action-setup@v2
+
+    - name: Set Node.js version to ${{ inputs.node }}
+      uses: actions/setup-node@v3
+      with:
+        cache: pnpm
+        node-version: ${{ inputs.node }}
