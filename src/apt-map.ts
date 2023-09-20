@@ -1,32 +1,32 @@
 export class AptMap<K = any, V = any> extends Map<K, V> {
   get firstKey(): K | undefined {
-    return this.keys().next().value;
+    return this.keys().next().value
   }
 
   get firstValue(): V | undefined {
-    return this.values().next().value;
+    return this.values().next().value
   }
 
   get isEmpty(): boolean {
-    return this.size === 0;
+    return this.size === 0
   }
 
   get lastKey(): K | undefined {
-    const index = this.size - 1;
-    const keys = this.keysAsArray();
+    const index = this.size - 1
+    const keys = this.keysAsArray()
 
     return keys[index]
   }
 
   get lastValue(): V | undefined {
-    const index = this.size - 1;
-    const values = this.valuesAsArray();
+    const index = this.size - 1
+    const values = this.valuesAsArray()
 
     return values[index]
   }
 
   clone(): AptMap<K, V> {
-    return new AptMap<K, V>(this.entriesAsArray());
+    return new AptMap<K, V>(this.entriesAsArray())
   }
 
   concat<T extends V>(aptMap: AptMap<K, T>): AptMap<K, V> {
@@ -36,183 +36,183 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   }
 
   entriesAsArray(): Array<[K, V]> {
-    return Array.from(this.entries());
+    return Array.from(this.entries())
   }
 
   every(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): boolean {
-    let result = false;
+    let result = false
 
     for (const [mapKey, mapValue] of this) {
-      result = cb.apply(this, [mapValue, mapKey, this]);
+      result = cb.apply(this, [mapValue, mapKey, this])
 
-      if (!result) {
-        break;
-      }
+      if (!result) 
+        break
+      
     }
 
-    return result;
+    return result
   }
 
   filter(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): AptMap<K, V> {
-    const filtered = new AptMap<K, V>();
+    const filtered = new AptMap<K, V>()
 
     for (const [mapKey, mapValue] of this) {
-      const isFiltered = cb.apply(this, [mapValue, mapKey, this]);
+      const isFiltered = cb.apply(this, [mapValue, mapKey, this])
 
-      if (isFiltered) {
-        filtered.set(mapKey, mapValue);
-      }
+      if (isFiltered) 
+        filtered.set(mapKey, mapValue)
+      
     }
 
-    return filtered;
+    return filtered
   }
 
   findEntry(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): [K, V] | [] {
-    let foundKey: K | undefined;
-    let foundValue: V | undefined;
+    let foundKey: K | undefined
+    let foundValue: V | undefined
 
     for (const [mapKey, mapValue] of this) {
-      const isFound = cb.apply(this, [mapValue, mapKey, this]);
+      const isFound = cb.apply(this, [mapValue, mapKey, this])
 
       if (isFound) {
-        foundKey = mapKey;
-        foundValue = mapValue;
-        break;
+        foundKey = mapKey
+        foundValue = mapValue
+        break
       }
     }
 
-    return Boolean(foundKey && foundValue)
+    return foundKey && foundValue
       ? [foundKey as K, foundValue as V]
-      : [];
+      : []
   }
 
   findKey(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): K | undefined {
-    const [key] = this.findEntry(cb);
-    return key;
+    const [key] = this.findEntry(cb)
+    return key
   }
 
   findValue(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): V | undefined {
-    const [, value] = this.findEntry(cb);
-    return value;
+    const [, value] = this.findEntry(cb)
+    return value
   }
 
   getEntryByIndex(index: number): [K, V] | [] {
-    let resultEntry: [K, V] | [] = [];
-    const isIndexInRange = index >= 0 && index < this.size;
+    let resultEntry: [K, V] | [] = []
+    const isIndexInRange = index >= 0 && index < this.size
 
     if (isIndexInRange) {
-      let mapIndex = 0;
+      let mapIndex = 0
 
       for (const entry of this) {
         if (index === mapIndex) {
-          resultEntry = entry;
-          break;
+          resultEntry = entry
+          break
         }
 
-        mapIndex++;
+        mapIndex++
       }
     }
 
-    return resultEntry;
+    return resultEntry
   }
 
   getMany(keys: K[]): AptMap<K, V> {
     const mappings: Array<[K, V]> = keys.reduce((acc, key) => {
-      const isExist = this.has(key);
+      const isExist = this.has(key)
 
-      if (isExist) {
-        acc.push([key, this.get(key) as V]);
-      }
+      if (isExist) 
+        acc.push([key, this.get(key) as V])
+      
 
-      return acc;
-    }, [] as Array<[K, V]>);
+      return acc
+    }, [] as Array<[K, V]>)
 
-    return new AptMap<K, V>(mappings);
+    return new AptMap<K, V>(mappings)
   }
 
   hasValue(value: V, compareStructure = false): boolean {
-    let result = false;
+    let result = false
     const compareFn = compareStructure
       ? (val1: V, val2: V) => JSON.stringify(val1) === JSON.stringify(val2)
-      : (val1: V, val2: V) => val1 === val2;
+      : (val1: V, val2: V) => val1 === val2
 
     for (const [, mapValue] of this) {
-      const areEqual = compareFn(value, mapValue);
+      const areEqual = compareFn(value, mapValue)
 
       if (areEqual) {
-        result = true;
-        break;
+        result = true
+        break
       }
     }
 
-    return result;
+    return result
   }
 
   keysAsArray(): K[] {
-    return Array.from(this.keys());
+    return Array.from(this.keys())
   }
 
   remapValues<T = any>(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => T): AptMap<K, T> {
-    const mapped = new AptMap<K, T>();
+    const mapped = new AptMap<K, T>()
 
     for (const [mapKey, mapValue] of this) {
-      const resultValue = cb.apply(this, [mapValue, mapKey, this]);
-      mapped.set(mapKey, resultValue);
+      const resultValue = cb.apply(this, [mapValue, mapKey, this])
+      mapped.set(mapKey, resultValue)
     }
 
-    return mapped;
+    return mapped
   }
 
   remapToArray<T = any>(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => T): T[] {
-    const mapped: T[] = [];
+    const mapped: T[] = []
 
     for (const [mapKey, mapValue] of this) {
-      const resultValue = cb.apply(this, [mapValue, mapKey, this]);
-      mapped.push(resultValue);
+      const resultValue = cb.apply(this, [mapValue, mapKey, this])
+      mapped.push(resultValue)
     }
 
-    return mapped;
+    return mapped
   }
 
   remapToObject<T = any>(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => T): Record<string, T> {
-    const mapped: Record<string, T> = {};
+    const mapped: Record<string, T> = {}
 
     for (const [mapKey, mapValue] of this) {
       const objectKey = typeof mapKey === 'object'
         ? JSON.stringify(mapKey)
         : String(mapKey)
 
-      mapped[objectKey] = cb.apply(this, [mapValue, mapKey, this]);
+      mapped[objectKey] = cb.apply(this, [mapValue, mapKey, this])
     }
 
-    return mapped;
+    return mapped
   }
 
   setMany<T extends V>(aptMap: AptMap<K, T>): AptMap<K, V> {
-    aptMap.forEach((value, key) => this.set(key, value));
-    return this;
+    aptMap.forEach((value, key) => this.set(key, value))
+    return this
   }
 
   some(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): boolean {
-    let result = false;
+    let result = false
 
     for (const [mapKey, mapValue] of this) {
-      const isTruthy = cb.apply(this, [mapValue, mapKey, this]);
+      const isTruthy = cb.apply(this, [mapValue, mapKey, this])
 
       if (isTruthy) {
-        result = true;
-        break;
+        result = true
+        break
       }
     }
 
-    return result;
+    return result
   }
 
   toObject(): Record<string, V> {
-    return this.remapToObject((value) => value);
+    return this.remapToObject(value => value)
   }
 
   valuesAsArray(): V[] {
-    return Array.from(this.values());
+    return Array.from(this.values())
   }
 }
