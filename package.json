@@ -36,6 +36,7 @@
   ],
   "scripts": {
     "build": "tsup",
+    "docs": "typedoc ./src/apt-map.ts --githubPages false --plugin typedoc-plugin-markdown",
     "lint:fix": "pnpm run lint --fix",
     "lint:packages": "pnpm dedupe --check || pnpm dedupe",
     "lint": "eslint --cache --max-warnings 0 --report-unused-disable-directives .",
@@ -52,6 +53,8 @@
     "@vitest/ui": "^0.34.4",
     "eslint": "^8.49.0",
     "tsup": "^7.2.0",
+    "typedoc": "^0.25.1",
+    "typedoc-plugin-markdown": "^3.16.0",
     "typescript": "^5.2.2",
     "vitest": "^0.34.4"
   }
