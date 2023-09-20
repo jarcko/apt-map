@@ -220,7 +220,6 @@ describe('AptMap', () => {
         entries[0],
         entries[2],
       ] as Iterable<readonly [any, any]>)
-
       const result = aptMap.getMany(['a', 'x', 'c'])
       expect(result).toEqual(expectedAptMap)
     })
@@ -243,6 +242,7 @@ describe('AptMap', () => {
       const newValueClone = { foo: 'bar' }
 
       aptMap.set(newKey, newValue)
+
       const result = aptMap.hasValue(newValueClone, true)
       expect(result).toBe(true)
     })
@@ -278,7 +278,6 @@ describe('AptMap', () => {
         entries[1]![1] * multiplier,
         entries[2]![1] * multiplier,
       ]
-
       const result = aptMap.remapToArray(value => value * multiplier)
       expect(result).toEqual(expectedArray)
     })
@@ -289,7 +288,6 @@ describe('AptMap', () => {
       const aptMap = new AptMap([
         [{ id: 1 }, 1],
       ] as Iterable<readonly [any, any]>)
-
       const result = aptMap.remapToObject(value => value)
 
       expect(result).toEqual({
@@ -303,7 +301,6 @@ describe('AptMap', () => {
         b: entries[1]![1] * multiplier,
         c: entries[2]![1] * multiplier,
       }
-
       const result = aptMap.remapToObject(value => value * multiplier)
       expect(result).toEqual(expectedObject)
     })
@@ -342,7 +339,6 @@ describe('AptMap', () => {
         entries[2],
         entries2[1],
       ] as Iterable<readonly [any, any]>)
-
       const result = aptMap.setMany(aptMap2)
       expect(result).toEqual(expectedAptMap)
     })
