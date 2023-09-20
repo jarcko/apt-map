@@ -35,6 +35,7 @@
     "./dist"
   ],
   "scripts": {
+    "bench": "vitest bench",
     "build": "tsup",
     "docs": "typedoc ./src/apt-map.ts --githubPages false --plugin typedoc-plugin-markdown",
     "lint:fix": "pnpm run lint --fix",
