@@ -9,7 +9,8 @@
     ],
     "module": "CommonJS",
     "types": [
-      "@total-typescript/ts-reset"
+      "@total-typescript/ts-reset",
+      "vitest/globals"
     ],
     "outDir": "./dist"
   },

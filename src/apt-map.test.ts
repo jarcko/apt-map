@@ -1,5 +1,3 @@
-import { beforeEach, describe, expect, test } from '@jest/globals'
-
 import { AptMap } from './apt-map'
 
 describe('AptMap', () => {
@@ -257,9 +255,10 @@ describe('AptMap', () => {
     })
   })
 
+  const multiplier = 2
+
   describe('remapValues method', () => {
     test('should return new apt map with same keys but new values', () => {
-      const multiplier = 2
       const expectedAptMap = new AptMap([
         [entries[0]![0], entries[0]![1] * multiplier],
         [entries[1]![0], entries[1]![1] * multiplier],
@@ -287,7 +286,18 @@ describe('AptMap', () => {
 
   describe('remapToObject method', () => {
     test('should return an object with keys from apt map and new re-mapped values', () => {
-      const multiplier = 2
+      const aptMap = new AptMap([
+        [{ id: 1 }, 1],
+      ] as Iterable<readonly [any, any]>)
+
+      const result = aptMap.remapToObject(value => value)
+
+      expect(result).toEqual({
+        '{"id":1}': 1,
+      })
+    })
+
+    test('should return an object with keys from apt map and new re-mapped values', () => {
       const expectedObject = {
         a: entries[0]![1] * multiplier,
         b: entries[1]![1] * multiplier,
