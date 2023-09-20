@@ -45,7 +45,7 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Returns `true` if a condition in callback function is satisfied for all entries, otherwise `false`.
    */
-  every(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): boolean {
+  every(cb: Callback<K, V>) {
     let result = false
 
     for (const [mapKey, mapValue] of this) {
