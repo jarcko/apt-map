@@ -1,5 +1,3 @@
-type Callback<K, V, R = boolean> = (value: V, key?: K, aptMap?: AptMap<K, V>) => R;
-
 export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Returns first key if it exists, otherwise `undefined`.
@@ -18,14 +16,14 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Returns `true` if apt map does not have any elements, otherwise `false`.
    */
-  get isEmpty() {
+  get isEmpty(): boolean {
     return this.size === 0;
   }
 
   /**
    * Returns last key if it exists, otherwise `undefined`.
    */
-  get lastKey() {
+  get lastKey(): K | undefined {
     const index = this.size - 1;
     const keys = this.keysAsArray();
 
@@ -35,7 +33,7 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Returns last value if it exists, otherwise `undefined`.
    */
-  get lastValue() {
+  get lastValue(): V | undefined {
     const index = this.size - 1;
     const values = this.valuesAsArray();
 
@@ -45,14 +43,14 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Creates a shallow copy of an AptMap and returns it.
    */
-  clone() {
+  clone(): AptMap<K, V> {
     return new AptMap<K, V>(this.entriesAsArray());
   }
 
   /**
    * Concatenates 2 apt maps and return merged result.
    */
-  concat<T extends V>(aptMap: AptMap<K, T>) {
+  concat<T extends V>(aptMap: AptMap<K, T>): AptMap<K, V> {
     return this
       .clone()
       .setMany<T>(aptMap);
@@ -61,14 +59,14 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Returns an array of [key, value] pairs.
    */
-  entriesAsArray() {
+  entriesAsArray(): Array<[K, V]> {
     return Array.from(this.entries());
   }
 
   /**
    * Returns `true` if a condition in callback function is satisfied for all entries, otherwise `false`.
    */
-  every(cb: Callback<K, V>) {
+  every(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): boolean {
     let result = false;
 
     for (const [mapKey, mapValue] of this) {
@@ -85,7 +83,7 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Filters input apt map using callback function and returns filtered apt map.
    */
-  filter(cb: Callback<K, V>) {
+  filter(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): AptMap<K, V> {
     const filtered = new AptMap<K, V>();
 
     for (const [mapKey, mapValue] of this) {
@@ -102,7 +100,7 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Returns first entry which satisfies condition in callback function, otherwise an empty array.
    */
-  findEntry(cb: Callback<K, V>) {
+  findEntry(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): [K, V] | [] {
     let foundKey: K | undefined;
     let foundValue: V | undefined;
 
@@ -118,14 +116,14 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
     }
 
     return foundKey && foundValue
-      ? [foundKey, foundValue] as [K, V]
-      : [] as [];
+      ? [foundKey, foundValue]
+      : [];
   }
 
   /**
    * Returns first key which satisfies condition in callback function, otherwise `undefined`.
    */
-  findKey(cb: Callback<K, V>) {
+  findKey(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): K | undefined {
     const [key] = this.findEntry(cb);
 
     return key;
@@ -134,7 +132,7 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Returns first value which satisfies condition in callback function, otherwise `undefined`.
    */
-  findValue(cb: Callback<K, V>) {
+  findValue(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): V | undefined {
     const [, value] = this.findEntry(cb);
 
     return value;
@@ -143,7 +141,7 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Returns an entry by index if it exists, otherwise an empty array.
    */
-  getEntryByIndex(index: number) {
+  getEntryByIndex(index: number): [K, V] | [] {
     let resultEntry: [K, V] | [] = [];
     const isIndexInRange = index >= 0 && index < this.size;
 
@@ -167,16 +165,16 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Returns an apt map of entries which corresponds to specified keys if they exist in source apt map.
    */
-  getMany(keys: K[]) {
-    const mappings: [K, V][] = [];
+  getMany(keys: K[]): AptMap<K, V> {
+    const mappings = keys.reduce((acc, key) => {
+      const doesExist = this.has(key);
 
-    keys.forEach((key) => {
-      if (!this.has(key)) {
-        return;
+      if (doesExist) {
+        acc.push([key, this.get(key) as V]);
       }
 
-      mappings.push([key, this.get(key) as V]);
-    });
+      return acc;
+    }, [] as Array<[K, V]>);
 
     return new AptMap<K, V>(mappings);
   }
@@ -185,7 +183,7 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
    * Returns `true` if apt map has a specified value, otherwise `false`. Objects compared by reference by default.
    * Specify second argument when you need to compare objects by structure.
    */
-  hasValue(value: V, compareStructure = false) {
+  hasValue(value: V, compareStructure = false): boolean {
     let result = false;
 
     const compareFn = compareStructure
@@ -208,14 +206,14 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Returns an array of keys.
    */
-  keysAsArray() {
+  keysAsArray(): K[] {
     return Array.from(this.keys());
   }
 
   /**
    * Re-maps an apt map values to new values returned in callback function.
    */
-  remapValues< T = any >(cb: Callback<K, V, T>) {
+  remapValues<T = any>(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => T): AptMap<K, T> {
     const mapped = new AptMap<K, T>();
 
     for (const [mapKey, mapValue] of this) {
@@ -230,7 +228,7 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Re-maps an apt map to an array with values returned in callback function.
    */
-  remapToArray< T = any >(cb: Callback<K, V, T>) {
+  remapToArray<T = any>(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => T): T[] {
     const mapped: T[] = [];
 
     for (const [mapKey, mapValue] of this) {
@@ -245,7 +243,7 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Re-maps an apt map to an object keys from map and values returned in callback function.
    */
-  remapToObject< T = any >(cb: Callback<K, V, T>) {
+  remapToObject<T = any>(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => T): Record<string, T> {
     const mapped: Record<string, T> = {};
 
     for (const [mapKey, mapValue] of this) {
@@ -262,7 +260,7 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Adds/updates entries specified as input apt map. Returns updated apt map.
    */
-  setMany<T extends V>(aptMap: AptMap<K, T>) {
+  setMany<T extends V>(aptMap: AptMap<K, T>): AptMap<K, V> {
     aptMap.forEach((value, key) => this.set(key, value));
 
     return this;
@@ -271,7 +269,7 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Returns `true` if a condition in callback function is satisfied at least for one entry, otherwise `false`
    */
-  some(cb: Callback<K, V>) {
+  some(cb: (value: V, key?: K, aptMap?: AptMap<K, V>) => boolean): boolean {
     let result = false;
 
     for (const [mapKey, mapValue] of this) {
@@ -290,14 +288,14 @@ export class AptMap<K = any, V = any> extends Map<K, V> {
   /**
    * Converts apt map to object.
    */
-  toObject() {
-    return this.remapToObject(value => value);
+  toObject(): Record<string, V> {
+    return this.remapToObject((value) => value);
   }
 
   /**
    * Returns an array of values.
    */
-  valuesAsArray() {
+  valuesAsArray(): V[] {
     return Array.from(this.values());
   }
 }

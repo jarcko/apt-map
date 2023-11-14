@@ -1,6 +1,6 @@
 [apt-map](../README.md) / [Exports](../modules.md) / AptMap
 
-# Class: AptMap<K, V\>
+# Class: AptMap<K, V>
 
 ## Type parameters
 
@@ -11,7 +11,7 @@
 
 ## Hierarchy
 
-- `Map`<`K`, `V`\>
+- `Map`<`K`, `V`>
 
   ↳ **`AptMap`**
 
@@ -71,7 +71,7 @@
 
 ### constructor
 
-• **new AptMap**<`K`, `V`\>(`entries?`)
+• **new AptMap**<`K`, `V`>(`entries?`)
 
 #### Type parameters
 
@@ -82,19 +82,19 @@
 
 #### Parameters
 
-| Name | Type |
-| :------ | :------ |
-| `entries?` | ``null`` \| readonly readonly [`K`, `V`][] |
+| Name | Type     |
+| :------ |:---------|
+| `entries?` | ``null`` | readonly readonly [`K`, `V`][] |
 
 #### Inherited from
 
-Map<K, V\>.constructor
+Map<K, V>.constructor
 
 #### Defined in
 
 node_modules/.pnpm/typescript@5.2.2/node_modules/typescript/lib/lib.es2015.collection.d.ts:51
 
-• **new AptMap**<`K`, `V`\>(`iterable?`)
+• **new AptMap**<`K`, `V`>(`iterable?`)
 
 #### Type parameters
 
@@ -107,11 +107,11 @@ node_modules/.pnpm/typescript@5.2.2/node_modules/typescript/lib/lib.es2015.colle
 
 | Name | Type |
 | :------ | :------ |
-| `iterable?` | ``null`` \| `Iterable`<readonly [`K`, `V`]\> |
+| `iterable?` | ``null`` | `Iterable`<readonly [`K`, `V`]> |
 
 #### Inherited from
 
-Map<K, V\>.constructor
+Map<K, V>.constructor
 
 #### Defined in
 
@@ -163,13 +163,13 @@ node_modules/.pnpm/typescript@5.2.2/node_modules/typescript/lib/lib.es2015.symbo
 
 ### firstKey
 
-• `get` **firstKey**(): `undefined` \| `K`
+• `get` **firstKey**(): `undefined` | `K`
 
 Returns first key if it exists, otherwise `undefined`.
 
 #### Returns
 
-`undefined` \| `K`
+`undefined` | `K`
 
 #### Defined in
 
@@ -179,13 +179,13 @@ ___
 
 ### firstValue
 
-• `get` **firstValue**(): `undefined` \| `V`
+• `get` **firstValue**(): `undefined` | `V`
 
 Returns first value if it exists, otherwise `undefined`.
 
 #### Returns
 
-`undefined` \| `V`
+`undefined` | `V`
 
 #### Defined in
 
@@ -211,13 +211,13 @@ ___
 
 ### lastKey
 
-• `get` **lastKey**(): `undefined` \| `K`
+• `get` **lastKey**(): `undefined` | `K`
 
 Returns last key if it exists, otherwise `undefined`.
 
 #### Returns
 
-`undefined` \| `K`
+`undefined` | `K`
 
 #### Defined in
 
@@ -227,13 +227,13 @@ ___
 
 ### lastValue
 
-• `get` **lastValue**(): `undefined` \| `V`
+• `get` **lastValue**(): `undefined` | `V`
 
 Returns last value if it exists, otherwise `undefined`.
 
 #### Returns
 
-`undefined` \| `V`
+`undefined` | `V`
 
 #### Defined in
 
@@ -243,13 +243,13 @@ Returns last value if it exists, otherwise `undefined`.
 
 ### [iterator]
 
-▸ **[iterator]**(): `IterableIterator`<[`K`, `V`]\>
+▸ **[iterator]**(): `IterableIterator`<[`K`, `V`]>
 
 Returns an iterable of entries in the map.
 
 #### Returns
 
-`IterableIterator`<[`K`, `V`]\>
+`IterableIterator`<[`K`, `V`]>
 
 #### Inherited from
 
@@ -281,13 +281,13 @@ ___
 
 ### clone
 
-▸ **clone**(): [`AptMap`](AptMap.md)<`K`, `V`\>
+▸ **clone**(): [`AptMap`](AptMap.md)<`K`, `V`>
 
 Creates a shallow copy of an AptMap and returns it.
 
 #### Returns
 
-[`AptMap`](AptMap.md)<`K`, `V`\>
+[`AptMap`](AptMap.md)<`K`, `V`>
 
 #### Defined in
 
@@ -297,7 +297,7 @@ ___
 
 ### concat
 
-▸ **concat**<`T`\>(`aptMap`): [`AptMap`](AptMap.md)<`K`, `V`\>
+▸ **concat**<`T`>(`aptMap`): [`AptMap`](AptMap.md)<`K`, `V`>
 
 Concatenates 2 apt maps and return merged result.
 
@@ -311,11 +311,11 @@ Concatenates 2 apt maps and return merged result.
 
 | Name | Type |
 | :------ | :------ |
-| `aptMap` | [`AptMap`](AptMap.md)<`K`, `T`\> |
+| `aptMap` | [`AptMap`](AptMap.md)<`K`, `T`> |
 
 #### Returns
 
-[`AptMap`](AptMap.md)<`K`, `V`\>
+[`AptMap`](AptMap.md)<`K`, `V`>
 
 #### Defined in
 
@@ -351,13 +351,13 @@ ___
 
 ### entries
 
-▸ **entries**(): `IterableIterator`<[`K`, `V`]\>
+▸ **entries**(): `IterableIterator`<[`K`, `V`]>
 
 Returns an iterable of key, value pairs for every entry in the map.
 
 #### Returns
 
-`IterableIterator`<[`K`, `V`]\>
+`IterableIterator`<[`K`, `V`]>
 
 #### Inherited from
 
@@ -395,7 +395,7 @@ Returns `true` if a condition in callback function is satisfied for all entries,
 
 | Name | Type |
 | :------ | :------ |
-| `cb` | (`value`: `V`, `key?`: `K`, `aptMap?`: [`AptMap`](AptMap.md)<`K`, `V`\>) => `boolean` |
+| `cb` | (`value`: `V`, `key?`: `K`, `aptMap?`: [`AptMap`](AptMap.md)<`K`, `V`>) => `boolean` |
 
 #### Returns
 
@@ -409,7 +409,7 @@ ___
 
 ### filter
 
-▸ **filter**(`cb`): [`AptMap`](AptMap.md)<`K`, `V`\>
+▸ **filter**(`cb`): [`AptMap`](AptMap.md)<`K`, `V`>
 
 Filters input apt map using callback function and returns filtered apt map.
 
@@ -417,11 +417,11 @@ Filters input apt map using callback function and returns filtered apt map.
 
 | Name | Type |
 | :------ | :------ |
-| `cb` | `Callback`<`K`, `V`, `boolean`\> |
+| `cb` | `Callback`<`K`, `V`, `boolean`> |
 
 #### Returns
 
-[`AptMap`](AptMap.md)<`K`, `V`\>
+[`AptMap`](AptMap.md)<`K`, `V`>
 
 #### Defined in
 
@@ -431,7 +431,7 @@ ___
 
 ### findEntry
 
-▸ **findEntry**(`cb`): [] \| [`K`, `V`]
+▸ **findEntry**(`cb`): [] | [`K`, `V`]
 
 Returns first entry which satisfies condition in callback function, otherwise an empty array.
 
@@ -439,11 +439,11 @@ Returns first entry which satisfies condition in callback function, otherwise an
 
 | Name | Type |
 | :------ | :------ |
-| `cb` | `Callback`<`K`, `V`, `boolean`\> |
+| `cb` | `Callback`<`K`, `V`, `boolean`> |
 
 #### Returns
 
-[] \| [`K`, `V`]
+[] | [`K`, `V`]
 
 #### Defined in
 
@@ -453,7 +453,7 @@ ___
 
 ### findKey
 
-▸ **findKey**(`cb`): `undefined` \| `K`
+▸ **findKey**(`cb`): `undefined` | `K`
 
 Returns first key which satisfies condition in callback function, otherwise `undefined`.
 
@@ -461,11 +461,11 @@ Returns first key which satisfies condition in callback function, otherwise `und
 
 | Name | Type |
 | :------ | :------ |
-| `cb` | `Callback`<`K`, `V`, `boolean`\> |
+| `cb` | `Callback`<`K`, `V`, `boolean`> |
 
 #### Returns
 
-`undefined` \| `K`
+`undefined` | `K`
 
 #### Defined in
 
@@ -475,7 +475,7 @@ ___
 
 ### findValue
 
-▸ **findValue**(`cb`): `undefined` \| `V`
+▸ **findValue**(`cb`): `undefined` | `V`
 
 Returns first value which satisfies condition in callback function, otherwise `undefined`.
 
@@ -483,11 +483,11 @@ Returns first value which satisfies condition in callback function, otherwise `u
 
 | Name | Type |
 | :------ | :------ |
-| `cb` | `Callback`<`K`, `V`, `boolean`\> |
+| `cb` | `Callback`<`K`, `V`, `boolean`> |
 
 #### Returns
 
-`undefined` \| `V`
+`undefined` | `V`
 
 #### Defined in
 
@@ -505,7 +505,7 @@ Executes a provided function once per each key/value pair in the Map, in inserti
 
 | Name | Type |
 | :------ | :------ |
-| `callbackfn` | (`value`: `V`, `key`: `K`, `map`: `Map`<`K`, `V`\>) => `void` |
+| `callbackfn` | (`value`: `V`, `key`: `K`, `map`: `Map`<`K`, `V`>) => `void` |
 | `thisArg?` | `any` |
 
 #### Returns
@@ -524,7 +524,7 @@ ___
 
 ### get
 
-▸ **get**(`key`): `undefined` \| `V`
+▸ **get**(`key`): `undefined` | `V`
 
 Returns a specified element from the Map object. If the value that is associated to the provided key is an object, then you will get a reference to that object and any change made to that object will effectively modify it inside the Map.
 
@@ -536,7 +536,7 @@ Returns a specified element from the Map object. If the value that is associated
 
 #### Returns
 
-`undefined` \| `V`
+`undefined` | `V`
 
 Returns the element associated with the specified key. If no element is associated with the specified key, undefined is returned.
 
@@ -552,7 +552,7 @@ ___
 
 ### getEntryByIndex
 
-▸ **getEntryByIndex**(`index`): [] \| [`K`, `V`]
+▸ **getEntryByIndex**(`index`): [] | [`K`, `V`]
 
 Returns an entry by index if it exists, otherwise an empty array.
 
@@ -564,7 +564,7 @@ Returns an entry by index if it exists, otherwise an empty array.
 
 #### Returns
 
-[] \| [`K`, `V`]
+[] | [`K`, `V`]
 
 #### Defined in
 
@@ -574,7 +574,7 @@ ___
 
 ### getMany
 
-▸ **getMany**(`keys`): [`AptMap`](AptMap.md)<`K`, `V`\>
+▸ **getMany**(`keys`): [`AptMap`](AptMap.md)<`K`, `V`>
 
 Returns an apt map of entries which corresponds to specified keys if they exist in source apt map.
 
@@ -586,7 +586,7 @@ Returns an apt map of entries which corresponds to specified keys if they exist 
 
 #### Returns
 
-[`AptMap`](AptMap.md)<`K`, `V`\>
+[`AptMap`](AptMap.md)<`K`, `V`>
 
 #### Defined in
 
@@ -624,7 +624,7 @@ node_modules/.pnpm/typescript@5.2.2/node_modules/typescript/lib/lib.es2015.colle
 
 | Name | Type |
 | :------ | :------ |
-| `value` | `K` \| `WidenLiteral`<`K`\> & {} |
+| `value` | `K` | `WidenLiteral`<`K`> & {} |
 
 #### Returns
 
@@ -666,13 +666,13 @@ ___
 
 ### keys
 
-▸ **keys**(): `IterableIterator`<`K`\>
+▸ **keys**(): `IterableIterator`<`K`>
 
 Returns an iterable of keys in the map
 
 #### Returns
 
-`IterableIterator`<`K`\>
+`IterableIterator`<`K`>
 
 #### Inherited from
 
@@ -702,7 +702,7 @@ ___
 
 ### remapToArray
 
-▸ **remapToArray**<`T`\>(`cb`): `T`[]
+▸ **remapToArray**<`T`>(`cb`): `T`[]
 
 Re-maps an apt map to an array with values returned in callback function.
 
@@ -716,7 +716,7 @@ Re-maps an apt map to an array with values returned in callback function.
 
 | Name | Type |
 | :------ | :------ |
-| `cb` | `Callback`<`K`, `V`, `T`\> |
+| `cb` | `Callback`<`K`, `V`, `T`> |
 
 #### Returns
 
@@ -730,7 +730,7 @@ ___
 
 ### remapToObject
 
-▸ **remapToObject**<`T`\>(`cb`): `Record`<`string`, `T`\>
+▸ **remapToObject**<`T`>(`cb`): `Record`<`string`, `T`>
 
 Re-maps an apt map to an object keys from map and values returned in callback function.
 
@@ -744,11 +744,11 @@ Re-maps an apt map to an object keys from map and values returned in callback fu
 
 | Name | Type |
 | :------ | :------ |
-| `cb` | `Callback`<`K`, `V`, `T`\> |
+| `cb` | `Callback`<`K`, `V`, `T`> |
 
 #### Returns
 
-`Record`<`string`, `T`\>
+`Record`<`string`, `T`>
 
 #### Defined in
 
@@ -758,7 +758,7 @@ ___
 
 ### remapValues
 
-▸ **remapValues**<`T`\>(`cb`): [`AptMap`](AptMap.md)<`K`, `T`\>
+▸ **remapValues**<`T`>(`cb`): [`AptMap`](AptMap.md)<`K`, `T`>
 
 Re-maps an apt map values to new values returned in callback function.
 
@@ -772,11 +772,11 @@ Re-maps an apt map values to new values returned in callback function.
 
 | Name | Type |
 | :------ | :------ |
-| `cb` | `Callback`<`K`, `V`, `T`\> |
+| `cb` | `Callback`<`K`, `V`, `T`> |
 
 #### Returns
 
-[`AptMap`](AptMap.md)<`K`, `T`\>
+[`AptMap`](AptMap.md)<`K`, `T`>
 
 #### Defined in
 
@@ -786,7 +786,7 @@ ___
 
 ### set
 
-▸ **set**(`key`, `value`): [`AptMap`](AptMap.md)<`K`, `V`\>
+▸ **set**(`key`, `value`): [`AptMap`](AptMap.md)<`K`, `V`>
 
 Adds a new element with a specified key and value to the Map. If an element with the same key already exists, the element will be updated.
 
@@ -799,7 +799,7 @@ Adds a new element with a specified key and value to the Map. If an element with
 
 #### Returns
 
-[`AptMap`](AptMap.md)<`K`, `V`\>
+[`AptMap`](AptMap.md)<`K`, `V`>
 
 #### Inherited from
 
@@ -813,7 +813,7 @@ ___
 
 ### setMany
 
-▸ **setMany**<`T`\>(`aptMap`): [`AptMap`](AptMap.md)<`K`, `V`\>
+▸ **setMany**<`T`>(`aptMap`): [`AptMap`](AptMap.md)<`K`, `V`>
 
 Adds/updates entries specified as input apt map. Returns updated apt map.
 
@@ -827,11 +827,11 @@ Adds/updates entries specified as input apt map. Returns updated apt map.
 
 | Name | Type |
 | :------ | :------ |
-| `aptMap` | [`AptMap`](AptMap.md)<`K`, `T`\> |
+| `aptMap` | [`AptMap`](AptMap.md)<`K`, `T`> |
 
 #### Returns
 
-[`AptMap`](AptMap.md)<`K`, `V`\>
+[`AptMap`](AptMap.md)<`K`, `V`>
 
 #### Defined in
 
@@ -849,7 +849,7 @@ Returns `true` if a condition in callback function is satisfied at least for one
 
 | Name | Type |
 | :------ | :------ |
-| `cb` | `Callback`<`K`, `V`, `boolean`\> |
+| `cb` | `Callback`<`K`, `V`, `boolean`> |
 
 #### Returns
 
@@ -863,13 +863,13 @@ ___
 
 ### toObject
 
-▸ **toObject**(): `Record`<`string`, `V`\>
+▸ **toObject**(): `Record`<`string`, `V`>
 
 Converts apt map to object.
 
 #### Returns
 
-`Record`<`string`, `V`\>
+`Record`<`string`, `V`>
 
 #### Defined in
 
@@ -879,13 +879,13 @@ ___
 
 ### values
 
-▸ **values**(): `IterableIterator`<`V`\>
+▸ **values**(): `IterableIterator`<`V`>
 
 Returns an iterable of values in the map
 
 #### Returns
 
-`IterableIterator`<`V`\>
+`IterableIterator`<`V`>
 
 #### Inherited from
 
