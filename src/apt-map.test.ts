@@ -1,5 +1,3 @@
-import { describe, expect, test } from '@jest/globals';
-
 import { AptMap } from './apt-map';
 
 describe('AptMap', () => {
@@ -23,7 +21,7 @@ describe('AptMap', () => {
   describe('firstKey getter', () => {
     test('should return first key when it exists', () => {
       const result = aptMap.firstKey;
-      expect(result).toBe(entries[0][0]);
+      expect(result).toBe(entries[0]![0]);
     });
 
     test('should return undefined when apt map is empty', () => {
@@ -36,7 +34,7 @@ describe('AptMap', () => {
   describe('firstValue getter', () => {
     test('should return first value when it exists', () => {
       const result = aptMap.firstValue;
-      expect(result).toBe(entries[0][1]);
+      expect(result).toBe(entries[0]![1]);
     });
 
     test('should return undefined when apt map is empty', () => {
@@ -62,7 +60,7 @@ describe('AptMap', () => {
   describe('lastKey getter', () => {
     test('should return last key when it exists', () => {
       const result = aptMap.lastKey;
-      expect(result).toBe(entries[2][0]);
+      expect(result).toBe(entries[2]![0]);
     });
 
     test('should return undefined when apt map is empty', () => {
@@ -75,7 +73,7 @@ describe('AptMap', () => {
   describe('lastValue getter', () => {
     test('should return last value when it exists', () => {
       const result = aptMap.lastValue;
-      expect(result).toBe(entries[2][1]);
+      expect(result).toBe(entries[2]![1]);
     });
 
     test('should return undefined when apt map is empty', () => {
@@ -112,7 +110,7 @@ describe('AptMap', () => {
         ['e', 5],
       ];
 
-      aptMap2 = new AptMap(entries2)
+      aptMap2 = new AptMap(entries2);
     });
 
     test('should return new apt map combined of 2 apt maps', () => {
@@ -134,7 +132,7 @@ describe('AptMap', () => {
         entries2[2],
         entries[2],
         entries2[1],
-      ]);
+      ] as Iterable<readonly [any, any]>);
 
       const result = aptMap.concat(aptMap2);
       expect(result).toEqual(expectedAptMap);
@@ -163,7 +161,7 @@ describe('AptMap', () => {
   describe('filter method', () => {
     test('should return new apt map with filtered entries', () => {
       const filteredAptMap = aptMap.filter((value, key) => value > 1 && key !== 'b');
-      const expectedAptMap = new AptMap([entries[2]]);
+      const expectedAptMap = new AptMap([entries[2]] as Iterable<readonly [any, any]>);
       expect(filteredAptMap).toEqual(expectedAptMap);
     });
   });
@@ -183,7 +181,7 @@ describe('AptMap', () => {
   describe('findKey method', () => {
     test('should return the key which satisfies callback function condition', () => {
       const result = aptMap.findKey((value, key) => value === 2 && key === 'b');
-      expect(result).toEqual(entries[1][0]);
+      expect(result).toEqual(entries[1]![0]);
     });
 
     test('should return an empty array if callback function condition is not fulfilled', () => {
@@ -195,7 +193,7 @@ describe('AptMap', () => {
   describe('findValue method', () => {
     test('should return the key which satisfies callback function condition', () => {
       const result = aptMap.findValue((value, key) => value === 2 && key === 'b');
-      expect(result).toEqual(entries[1][1]);
+      expect(result).toEqual(entries[1]![1]);
     });
 
     test('should return an empty array if callback function condition is not fulfilled', () => {
@@ -221,8 +219,7 @@ describe('AptMap', () => {
       const expectedAptMap = new AptMap([
         entries[0],
         entries[2],
-      ]);
-
+      ] as Iterable<readonly [any, any]>);
       const result = aptMap.getMany(['a', 'x', 'c']);
       expect(result).toEqual(expectedAptMap);
     });
@@ -245,6 +242,7 @@ describe('AptMap', () => {
       const newValueClone = { foo: 'bar' };
 
       aptMap.set(newKey, newValue);
+
       const result = aptMap.hasValue(newValueClone, true);
       expect(result).toBe(true);
     });
@@ -257,16 +255,17 @@ describe('AptMap', () => {
     });
   });
 
+  const multiplier = 2;
+
   describe('remapValues method', () => {
     test('should return new apt map with same keys but new values', () => {
-      const multiplier = 2;
       const expectedAptMap = new AptMap([
-        [entries[0][0], entries[0][1] * multiplier],
-        [entries[1][0], entries[1][1] * multiplier],
-        [entries[2][0], entries[2][1] * multiplier],
+        [entries[0]![0], entries[0]![1] * multiplier],
+        [entries[1]![0], entries[1]![1] * multiplier],
+        [entries[2]![0], entries[2]![1] * multiplier],
       ]);
 
-      const result = aptMap.remapValues((value) => value * multiplier);
+      const result = aptMap.remapValues(value => value * multiplier);
       expect(result).toEqual(expectedAptMap);
     });
   });
@@ -275,26 +274,34 @@ describe('AptMap', () => {
     test('should return an array with new re-mapped values', () => {
       const multiplier = 2;
       const expectedArray = [
-        entries[0][1] * multiplier,
-        entries[1][1] * multiplier,
-        entries[2][1] * multiplier,
+        entries[0]![1] * multiplier,
+        entries[1]![1] * multiplier,
+        entries[2]![1] * multiplier,
       ];
-
-      const result = aptMap.remapToArray((value) => value * multiplier);
+      const result = aptMap.remapToArray(value => value * multiplier);
       expect(result).toEqual(expectedArray);
     });
   });
 
   describe('remapToObject method', () => {
     test('should return an object with keys from apt map and new re-mapped values', () => {
-      const multiplier = 2;
-      const expectedObject = {
-        'a': entries[0][1] * multiplier,
-        'b': entries[1][1] * multiplier,
-        'c': entries[2][1] * multiplier,
-      };
+      const aptMap = new AptMap([
+        [{ id: 1 }, 1],
+      ] as Iterable<readonly [any, any]>);
+      const result = aptMap.remapToObject(value => value);
 
-      const result = aptMap.remapToObject((value) => value * multiplier);
+      expect(result).toEqual({
+        '{"id":1}': 1,
+      });
+    });
+
+    test('should return an object with keys from apt map and new re-mapped values', () => {
+      const expectedObject = {
+        a: entries[0]![1] * multiplier,
+        b: entries[1]![1] * multiplier,
+        c: entries[2]![1] * multiplier,
+      };
+      const result = aptMap.remapToObject(value => value * multiplier);
       expect(result).toEqual(expectedObject);
     });
   });
@@ -309,7 +316,7 @@ describe('AptMap', () => {
         ['e', 5],
       ];
 
-      aptMap2 = new AptMap(entries2)
+      aptMap2 = new AptMap(entries2);
     });
 
     test('should return updated apt map with added entries', () => {
@@ -331,8 +338,7 @@ describe('AptMap', () => {
         entries2[2],
         entries[2],
         entries2[1],
-      ]);
-
+      ] as Iterable<readonly [any, any]>);
       const result = aptMap.setMany(aptMap2);
       expect(result).toEqual(expectedAptMap);
     });
@@ -353,14 +359,13 @@ describe('AptMap', () => {
   describe('toObject method', () => {
     test('should covert apt map to object', () => {
       const expectedObject = {
-        'a': entries[0][1],
-        'b': entries[1][1],
-        'c': entries[2][1],
+        a: entries[0]![1],
+        b: entries[1]![1],
+        c: entries[2]![1],
       };
 
       const result = aptMap.toObject();
       expect(result).toEqual(expectedObject);
-
     });
   });
 
@@ -370,5 +375,4 @@ describe('AptMap', () => {
       expect(result).toEqual([1, 2, 3]);
     });
   });
-
 });
